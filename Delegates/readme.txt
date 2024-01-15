@@ -6,3 +6,6 @@ Delegates:
 5.Can point parameterized method or non-parameterized method
 6.Delegate has no implementation means no body with {}
 7.Delegates are used to encapsulate methods (we are calling our method through delegates else direct)
+
+Single Case Delegates:Single case delegate point to a single method at a time.In this type delegate is assigned to a single method at a time 
+they are derived from system delegate class
