@@ -1,0 +1,1 @@
+Factory Pattern:Provides an interface for creating instances of class,but allows subclasses to alter the type of objects that will be created.It defines an interface for creating an object ,but lets subclasses alter the type of objects that will be created on run-time. 
