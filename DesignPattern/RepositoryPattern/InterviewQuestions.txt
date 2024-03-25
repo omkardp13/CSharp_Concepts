@@ -1,1 +1,36 @@
-
+1.What is the Repository Design Pattern?
+Answer: The Repository Design Pattern is a design pattern used to abstract the data access logic from the rest of the application. It provides a layer of abstraction between the application's business logic and the data source, such as a database or web service. The repository acts as a mediator that encapsulates the logic required to access and manipulate data.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2.What problem does the Repository Design Pattern solve?
+Answer: The Repository Design Pattern helps to solve the problem of coupling between the application's business logic and data access logic. By separating concerns, it allows for easier maintenance, testing, and switching of data sources without affecting the rest of the application.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.What are the key components of the Repository Design Pattern?
+Answer: The key components include:
+Repository Interface or Class: Defines methods for performing CRUD (Create, Read, Update, Delete) operations on data entities.
+Concrete Repository Implementations: Classes that implement the repository interface and provide the actual implementation for data access logic.
+Data Source: The underlying storage mechanism from which data is retrieved and persisted, such as a database or web service.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4.How does the Repository Design Pattern promote separation of concerns?
+Answer: The Repository Design Pattern separates the data access logic from the business logic of the application. This separation ensures that the business logic remains independent of the details of how data is retrieved and stored, promoting modularity, maintainability, and testability of the codebase.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5.Can you explain the difference between a Repository and a Data Access Object (DAO)?
+Answer: While both Repository and DAO patterns abstract the data access logic, they differ in their approach. A Repository typically provides a higher-level interface with methods for querying and managing data entities, while a DAO often mirrors the underlying data model more closely and provides lower-level access to individual database operations.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+6.How would you handle caching in a Repository implementation?
+Answer: Caching in a Repository implementation can be handled using various strategies such as in-memory caching, distributed caching, or using third-party caching libraries like Redis. Caching can help improve performance by reducing the number of database queries, but it requires careful consideration of data consistency and cache invalidation strategies.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7.What are the benefits of using the Repository Design Pattern?
+Answer: Some benefits include:
+Improved code maintainability: Separation of concerns leads to cleaner and more maintainable code.
+Testability: Business logic can be tested independently of data access logic.
+Switching of data sources: Easier to switch between different data storage implementations without affecting the application's business logic.
+Encapsulation of data access logic: Provides a centralized location for managing data access operations.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8.How does the Repository Design Pattern relate to the Unit of Work pattern?
+Answer: The Repository Design Pattern and the Unit of Work pattern often work together in a cohesive manner. The Repository manages the persistence of individual entities, while the Unit of Work pattern coordinates multiple repositories and ensures that changes are committed or rolled back as a single transaction.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+9.What are some potential drawbacks or limitations of the Repository Design Pattern?
+Answer: Some potential drawbacks include:
+Increased complexity: Introducing an additional layer of abstraction may increase complexity, especially in simpler applications.
+Over-generalization: Repositories may become too generic, leading to inefficient data access or complex query implementations.
+Performance considerations: Caching strategies and data retrieval mechanisms must be carefully chosen to avoid performance bottlenecks.
