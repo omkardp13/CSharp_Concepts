@@ -5,11 +5,11 @@ LINQ (Language Integrated Query) in C# is a powerful feature that allows develop
 
 LINQ (Language Integrated Query) provides a set of standard query operators that enable you to query data in various ways. These query operators can be broadly categorized into several groups based on their functionality:
 
-Projection Operators:
+1.Projection Operators:
 
-Select: Transforms each element of a sequence into a new form.
-SelectMany: Projects each element of a sequence to an IEnumerable<T> and flattens the resulting sequences into one sequence.
-Restriction Operators:
+   Select: Transforms each element of a sequence into a new form.
+   SelectMany: Projects each element of a sequence to an IEnumerable<T> and flattens the resulting sequences into one sequence.
+   Restriction Operators:
 
 Where: Filters a sequence based on a predicate function.
 OfType: Filters the elements of an IEnumerable based on a specified type.
