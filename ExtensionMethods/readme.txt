@@ -1,5 +1,9 @@
 Extension Methods: Extension methods allows you to add new methods to existing types without modifying them.
 ---------------------------------------Interview Questions------------------------------------------------------------------------------------------------------------------
+
+Extension methods in ASP.NET Core Web API enhance the framework's flexibility and reusability. They allow developers to extend existing types with new functionality in a clean, maintainable manner. By following best practices, you can create powerful extensions that simplify your code and improve readability.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 1.What are extension methods in C#?
 Answer: Extension methods enable you to add new methods to existing types without modifying, deriving, or recompiling the original type. They are static methods but are called as if they were instance methods of the extended type.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
