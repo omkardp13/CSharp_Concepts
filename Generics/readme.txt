@@ -1,4 +1,4 @@
-**************************************************************************Generics************************************************************************************************************************************
+**************************************************************************Generics************************************************************************************
 
 Generics in C# provide a powerful way to create reusable code that can work with different types while maintaining type safety. Generics allow you to define classes, interfaces, methods, and delegates that can operate on parameters of unspecified data types. This enables you to write flexible and efficient code that is not tied to specific data types.
 
