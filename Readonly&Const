@@ -1,0 +1,33 @@
+In C#, both readonly and const are used to define values that cannot be changed after they are assigned, but they have key differences in terms of usage and behavior:
+
+1. const (Constant)
+
+Value assigned at compile-time: The value of a const field must be known at compile time, meaning the value is assigned when the program is compiled.
+Static by default: const fields are implicitly static, which means they are shared across all instances of a class and belong to the type rather than to an object.
+Immutable: Once assigned, a const value cannot be changed.
+Scope: Can only be of primitive data types (e.g., int, float, string), enum types, or null for reference types. You cannot use complex objects like classes or arrays.
+Declaration: It must be initialized at the time of declaration.
+
+public const int MaxValue = 100; // Value set at compile-time
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2. readonly
+
+Value assigned at runtime: readonly fields can be assigned at runtime, either during declaration or in the constructor of the class. This makes it useful for values that are only known when the object is instantiated.
+Instance-specific: readonly can be instance-specific, meaning each instance of a class can have a different value (though it can also be marked static to behave like a constant).
+Immutable after assignment: Once assigned, a readonly field cannot be changed, except within a constructor.
+Scope: Can be used with any type, including reference types like objects, arrays, or classes.
+
+public readonly int MaxValue;
+
+public MyClass(int maxValue)
+{
+    MaxValue = maxValue; // Can be set in the constructor
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Use cases	For constant values known at compile-time, like mathematical constants	For values that are set during object construction but shouldn’t change afterward
+In summary, use const for values that are constant throughout the program and known at compile-time.
+Use readonly for values that can be set at runtime but should not be changed afterward.
