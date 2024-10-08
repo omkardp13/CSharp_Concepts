@@ -8,7 +8,7 @@ List<int> numbers = new List<int>();
 numbers.Add(1);
 numbers.Add(2);
 int firstNumber = numbers[0]; // No casting required
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------
 2. Dictionary<TKey, TValue>: A collection of key-value pairs where both key and value are strongly typed.
 
 Example:
@@ -46,8 +46,7 @@ bool added = set.Add(2); // Will return false as 2 is already in the set
 6. LinkedList<T>
 A doubly linked list where each node points to the next and previous node.
 Example:
-csharp
-Copy code
+
 LinkedList<int> linkedList = new LinkedList<int>();
 linkedList.AddFirst(1);
 linkedList.AddLast(2);
