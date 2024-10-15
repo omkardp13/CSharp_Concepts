@@ -10,3 +10,38 @@ Benefits of yield:
 Lazy Evaluation: Values are generated only when they are needed, not all at once.
 Memory Efficiency: Especially useful for large collections, since the entire collection doesn't need to be stored in memory at once.
 Cleaner Code: It allows simpler and more readable iterator methods without the need to manually manage the state of the iteration.
+
+
+Example in your code:
+In your example, the yield return statement in GetNumbers(int upto) method allows numbers from 0 to upto - 1 to be generated and returned one at a time:
+
+csharp
+Copy code
+public static IEnumerable<int> GetNumbers(int upto)
+{
+    for(int i = 0; i < upto; i++)
+    {
+        yield return i;  // Return one number at a time
+        Console.WriteLine("print");
+    }
+}
+When the foreach loop in the Main method iterates over numbers, it fetches the next number on each iteration. The method continues from where it left off after the last yield return call until the loop completes.
+
+Without yield:
+Without yield, you would need to store all the numbers in a collection like a List<int>, return the entire list, and then iterate over it, which can consume more memory:
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+public static IEnumerable<int> GetNumbers(int upto)
+{
+    List<int> numbers = new List<int>();
+    for (int i = 0; i < upto; i++)
+    {
+        numbers.Add(i);
+    }
+    return numbers;
+}
+Using yield makes this process more efficient and cleaner, especially for large or infinite sequences.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
