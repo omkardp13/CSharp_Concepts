@@ -6,3 +6,8 @@
 3.Execution: Deferred execution but in-memory. This means that all filtering, ordering, or projections are done in memory after loading the data.
 
 4.Best For: Small collections where all data can be loaded into memory.
+
+In this example:
+
+Where applies the filter, but it runs in memory because products is an in-memory List.
+Execution is deferred; only when iterating (e.g., in foreach) is the filtering actually applied.
