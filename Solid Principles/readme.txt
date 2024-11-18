@@ -127,10 +127,12 @@ OCP: The base Mobile class is closed for modification but open for extension. We
 This structure adheres to the first two principles of SOLID, ensuring maintainable and extensible code.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 1. What is the Open-Closed Principle (OCP), and how would you implement it in C# without modifying existing classes?
 Answer:
-The Open-Closed Principle states that software entities (like classes, modules, functions) should be open for extension but closed for modification. This means we can extend the behavior of a class without changing its existing code.
+The Open-Closed Principle states that software entities (like classes, modules, functions) should be open for extension but closed for modification. 
+This means we can extend the behavior of a class without changing its existing code.
 
 In C#, you can achieve this by using:
 
@@ -140,12 +142,12 @@ Interfaces: Design with interfaces and then implement different versions as need
 
 2. How does the Liskov Substitution Principle (LSP) relate to C# inheritance? Give an example where violating LSP causes problems.
 Answer:
+
 The Liskov Substitution Principle states that objects of a derived class should be able to replace objects of the base class without affecting the behavior of the program.
 
 Example of Violation:
 
-csharp
-Copy code
+
 public class Bird
 {
     public virtual void Fly() { }
@@ -158,9 +160,11 @@ public class Penguin : Bird
         throw new NotImplementedException("Penguins can't fly!");
     }
 }
+
 Problem:
 If Penguin is used wherever Bird is expected, calling Fly would throw an exception, violating LSP. A better design would be to separate FlyableBird and NonFlyableBird classes to avoid misuse.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 4. How can the Single Responsibility Principle (SRP) be broken unintentionally, and what are the signs that a class has multiple responsibilities?
 Answer:
 SRP states that a class should have only one reason to change, meaning it should handle a single responsibility.
@@ -172,8 +176,7 @@ The class name is generic or hard to define, indicating it has multiple jobs.
 Modifying one behavior might impact unrelated functionality.
 Example of Violation:
 
-csharp
-Copy code
+
 public class OrderProcessor
 {
     public void ProcessOrder(Order order) { /* Processing logic */ }
@@ -213,8 +216,6 @@ Dependency Inversion helps improve unit testing by allowing dependencies to be e
 
 Example:
 
-csharp
-Copy code
 public class OrderService
 {
     private readonly IEmailService _emailService;
@@ -260,8 +261,7 @@ public class ReportGenerator
 }
 Here, ReportGenerator directly depends on EmailService, making it harder to test or replace EmailService. To fix this, introduce an IEmailService interface and inject it via the constructor:
 
-csharp
-Copy code
+
 public class ReportGenerator
 {
     private readonly IEmailService _emailService;
@@ -276,6 +276,8 @@ public class ReportGenerator
         _emailService.SendReport();
     }
 }
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 8. How does Interface Segregation Principle (ISP) help improve unit testing in C#?
 Answer:
 ISP helps unit testing by creating smaller, focused interfaces, making it easier to create mock or stub implementations that only include the necessary methods for each test scenario.
@@ -303,8 +305,7 @@ LSP is violated if a subclass doesn’t behave as expected when used in place of
 
 Example:
 
-csharp
-Copy code
+
 public class Bird
 {
     public virtual void Fly() { /* Flying logic */ }
@@ -325,8 +326,6 @@ ISP helps by creating smaller, focused interfaces, which makes it easier for con
 
 Example:
 
-csharp
-Copy code
 public interface IOrder
 {
     void PlaceOrder();
@@ -334,10 +333,9 @@ public interface IOrder
     void GetOrderStatus();
     void ProcessRefund(); // Only for specific cases, but forced on all implementers
 }
+
 Refactored with ISP:
 
-csharp
-Copy code
 public interface IOrder
 {
     void PlaceOrder();
@@ -350,15 +348,15 @@ public interface IRefundableOrder
     void ProcessRefund();
 }
 With ISP, only classes that need ProcessRefund will implement IRefundableOrder, making it easier to work with just the methods needed.
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 6. How would you refactor code to comply with the Open-Closed Principle without creating many small classes?
 Answer:
 One way to comply with OCP without excessive classes is to use composition instead of inheritance or abstract interfaces. You can also use patterns like Strategy or Decorator to extend behavior by passing in different strategies rather than modifying existing classes.
 
 Example Using Strategy Pattern:
 
-csharp
-Copy code
 public interface ITaxStrategy
 {
     decimal CalculateTax(decimal amount);
@@ -390,6 +388,8 @@ public class Order
 }
 Here, Order is open for extension by changing the tax strategy but closed for modification, and we avoid creating many small classes.
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 7. What are some indicators that a class might be violating the Interface Segregation Principle (ISP) in C#?
 Answer:
 Indicators of ISP violations include:
@@ -404,8 +404,7 @@ Dependency Injection helps achieve DIP by allowing high-level modules to rely on
 
 Example:
 
-csharp
-Copy code
+
 public interface ILogger
 {
     void Log(string message);
@@ -428,17 +427,18 @@ public class ReportService
     public void GenerateReport() { _logger.Log("Report generated."); }
 }
 By injecting ILogger, ReportService follows DIP, and any implementation of ILogger (like DatabaseLogger, ConsoleLogger, etc.) can be used without modifying ReportService.
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 9. When might the Single Responsibility Principle (SRP) lead to a design that is harder to understand and maintain?
 Answer:
-SRP can lead to overly fragmented classes if taken to an extreme, making the design difficult to understand due to the sheer number of small classes. In smaller applications or projects, enforcing SRP strictly can lead to "micro-classes," each with limited functionality, increasing the cognitive load when tracking how the pieces interact.
+SRP can lead to overly fragmented classes if taken to an extreme, making the design difficult to understand due to the sheer number of small classes. 
+In smaller applications or projects, enforcing SRP strictly can lead to "micro-classes," each with limited functionality, increasing the cognitive load when tracking how the pieces interact.
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 10. Can you give an example where the Dependency Inversion Principle (DIP) was violated and explain how you would fix it?
 Answer:
+
 Violation Example:
 
-csharp
-Copy code
 public class NotificationService
 {
     private readonly EmailService _emailService = new EmailService();
@@ -448,12 +448,12 @@ public class NotificationService
         _emailService.SendEmail(message);
     }
 }
+
 Here, NotificationService depends directly on EmailService, violating DIP.
 
 Fix: Introduce an abstraction (INotificationService) and inject it.
 
-csharp
-Copy code
+
 public interface INotificationService
 {
     void Notify(string message);
@@ -479,14 +479,3 @@ public class NotificationService
     }
 }
 Now, NotificationService depends on an abstraction, allowing different notification methods to be swapped in without altering NotificationService.
-
-
-
-
-
-
-
-
-
-
-
