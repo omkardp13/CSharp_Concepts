@@ -1,133 +1,3 @@
-Mobile class in class there is Calling(),Messaging(),Camera() 
-
-this extends class 
-Iphone have Calling(),Messaging(),Camera()
-Samsubg have Calling(),Messaging(),Camera()
-Nokia(Basic) Calling(),Messaging() not Camera() 
-
-pls do first two points of solid principles c#
-
---->
-
-To demonstrate the first two points of the SOLID principles (Single Responsibility Principle and Open/Closed Principle) in C#, we can create a class structure that includes a base Mobile class and derived classes for Iphone, Samsung, and Nokia. Here’s how we can implement this:
-
-Single Responsibility Principle (SRP): Each class should have only one reason to change. We ensure that each class handles only its specific functionalities.
-Open/Closed Principle (OCP): Software entities should be open for extension but closed for modification. We achieve this by using inheritance and interfaces, allowing us to extend functionalities without modifying existing code.
-
-Step 1: Define Interfaces
-First, we'll define interfaces for the common functionalities (Calling, Messaging, Camera).
-
-
-public interface ICalling
-{
-    void Call();
-}
-
-public interface IMessaging
-{
-    void SendMessage();
-}
-
-public interface ICamera
-{
-    void TakePhoto();
-}
-
-
-Step 2: Create the Base Class
-Create a base class Mobile that will implement the basic functionalities.
-
-public abstract class Mobile : ICalling, IMessaging
-{
-    public abstract void Call();
-    public abstract void SendMessage();
-}
-
-
-Step 3: Extend the Base Class for Specific Models
-
-Extend the base class for each specific mobile model. Implement the additional functionalities where required.
-
-public class Iphone : Mobile, ICamera
-{
-    public override void Call()
-    {
-        Console.WriteLine("Iphone Calling...");
-    }
-
-    public override void SendMessage()
-    {
-        Console.WriteLine("Iphone Sending Message...");
-    }
-
-    public void TakePhoto()
-    {
-        Console.WriteLine("Iphone Taking Photo...");
-    }
-}
-
-public class Samsung : Mobile, ICamera
-{
-    public override void Call()
-    {
-        Console.WriteLine("Samsung Calling...");
-    }
-
-    public override void SendMessage()
-    {
-        Console.WriteLine("Samsung Sending Message...");
-    }
-
-    public void TakePhoto()
-    {
-        Console.WriteLine("Samsung Taking Photo...");
-    }
-}
-
-public class Nokia : Mobile
-{
-    public override void Call()
-    {
-        Console.WriteLine("Nokia Calling...");
-    }
-
-    public override void SendMessage()
-    {
-        Console.WriteLine("Nokia Sending Message...");
-    }
-}
-
-
-Example Usage
-Here is an example of how to use these classes:
-
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        Mobile iphone = new Iphone();
-        iphone.Call();
-        iphone.SendMessage();
-        ((ICamera)iphone).TakePhoto();
-
-        Mobile samsung = new Samsung();
-        samsung.Call();
-        samsung.SendMessage();
-        ((ICamera)samsung).TakePhoto();
-
-        Mobile nokia = new Nokia();
-        nokia.Call();
-        nokia.SendMessage();
-        // Nokia does not have a camera
-    }
-}
-Explanation
-SRP: Each class (Iphone, Samsung, Nokia) has a single responsibility, which is to define the functionalities specific to that mobile model.
-OCP: The base Mobile class is closed for modification but open for extension. We can add new mobile models by creating new classes without modifying the existing codebase.
-This structure adheres to the first two principles of SOLID, ensuring maintainable and extensible code.
-
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 1. What is the Open-Closed Principle (OCP), and how would you implement it in C# without modifying existing classes?
 Answer:
@@ -138,6 +8,7 @@ In C#, you can achieve this by using:
 
 Inheritance and Polymorphism: Define a base class and create new classes that inherit and extend its behavior.
 Interfaces: Design with interfaces and then implement different versions as needed
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 2. How does the Liskov Substitution Principle (LSP) relate to C# inheritance? Give an example where violating LSP causes problems.
@@ -162,7 +33,8 @@ public class Penguin : Bird
 }
 
 Problem:
-If Penguin is used wherever Bird is expected, calling Fly would throw an exception, violating LSP. A better design would be to separate FlyableBird and NonFlyableBird classes to avoid misuse.
+If Penguin is used wherever Bird is expected, calling Fly would throw an exception, violating LSP. 
+A better design would be to separate FlyableBird and NonFlyableBird classes to avoid misuse.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 4. How can the Single Responsibility Principle (SRP) be broken unintentionally, and what are the signs that a class has multiple responsibilities?
@@ -174,8 +46,9 @@ Signs of SRP Violation:
 The class has multiple methods that don’t relate to each other.
 The class name is generic or hard to define, indicating it has multiple jobs.
 Modifying one behavior might impact unrelated functionality.
-Example of Violation:
 
+
+Example of Violation:
 
 public class OrderProcessor
 {
@@ -183,32 +56,42 @@ public class OrderProcessor
     public void SendOrderEmail(Order order) { /* Email logic */ }
     public void SaveOrderToDatabase(Order order) { /* Database logic */ }
 }
-Here, OrderProcessor is handling order processing, emailing, and database saving. Splitting responsibilities into separate classes (OrderService, EmailService, OrderRepository) would resolve this.
+Here, OrderProcessor is handling order processing, emailing, and database saving. 
+Splitting responsibilities into separate classes (OrderService, EmailService, OrderRepository) would resolve this.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 5. In what scenarios could adhering strictly to the Interface Segregation Principle (ISP) make the design more complex rather than simpler?
 Answer:
-The Interface Segregation Principle suggests that no client should be forced to depend on methods it does not use. However, splitting interfaces too granularly can lead to over-engineering, making the code harder to read and maintain.
+The Interface Segregation Principle suggests that no client should be forced to depend on methods it does not use. 
+However, splitting interfaces too granularly can lead to over-engineering, making the code harder to read and maintain.
 
 Example Scenario:
-Suppose you have a Printer interface for a simple application where splitting into IPrint, IColorPrint, and IScan may be unnecessary if most printers in the system perform all actions. This would add complexity without significant benefit, especially in small-scale systems or if functionality is unlikely to change.
+Suppose you have a Printer interface for a simple application where splitting into IPrint, IColorPrint, and IScan may be unnecessary if most printers in the system perform all actions. 
+This would add complexity without significant benefit, especially in small-scale systems or if functionality is unlikely to change.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 6. How would you use SOLID principles to refactor a large class with many responsibilities in C#?
 Answer:
 
 Identify Single Responsibility Violations: Break the class down by responsibility.
+
 Use Interfaces (ISP): Define interfaces based on the specific responsibilities and use Dependency Injection to decouple.
+
 Extend with Open-Closed Principle: Use inheritance or composition to add new functionality without modifying the original class.
+
 Ensure Substitutability (LSP): Check that any derived classes do not alter expected behavior.
+
 Invert Dependencies (DIP): Refactor dependencies on specific classes to rely on interfaces or abstractions.
+
 By applying these steps, you make the class more modular, maintainable, and compliant with SOLID principles.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 7. How can the Open-Closed Principle and Liskov Substitution Principle be in conflict in certain cases?
 Answer:
-The Open-Closed Principle allows a class to be extended with new functionality, but in doing so, if a derived class changes the behavior of a base class method, it can violate the Liskov Substitution Principle.
+The Open-Closed Principle allows a class to be extended with new functionality, 
+but in doing so, if a derived class changes the behavior of a base class method, it can violate the Liskov Substitution Principle.
 
 Example:
-Suppose a base class method is extended in a derived class with additional functionality that changes expected outcomes (e.g., throwing exceptions in situations where the base class wouldn’t). The derived class would violate LSP by behaving differently, even though OCP is followed to extend functionality.
+Suppose a base class method is extended in a derived class with additional functionality that changes expected outcomes (e.g., throwing exceptions in situations where the base class wouldn’t).
+The derived class would violate LSP by behaving differently, even though OCP is followed to extend functionality.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 8. Can you give an example where Dependency Inversion can improve unit testing?
 Answer:
@@ -243,12 +126,11 @@ For a simple command-line tool that performs file processing, introducing abstra
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 7. What’s an example of a code smell indicating a violation of the Dependency Inversion Principle?
 Answer:
+
 A common code smell is when a high-level module directly instantiates a low-level module, indicating tight coupling between components.
 
 Example of DIP Violation:
 
-csharp
-Copy code
 public class ReportGenerator
 {
     private readonly EmailService _emailService = new EmailService();
@@ -259,6 +141,7 @@ public class ReportGenerator
         _emailService.SendReport();
     }
 }
+
 Here, ReportGenerator directly depends on EmailService, making it harder to test or replace EmailService. To fix this, introduce an IEmailService interface and inject it via the constructor:
 
 
@@ -392,12 +275,17 @@ Here, Order is open for extension by changing the tax strategy but closed for mo
 
 7. What are some indicators that a class might be violating the Interface Segregation Principle (ISP) in C#?
 Answer:
+
 Indicators of ISP violations include:
 
 Unimplemented Methods: A class that implements an interface but leaves some methods empty or throws exceptions.
+
 Frequent Changes: When unrelated methods are added to an interface, it causes all implementers to update even if they don’t need the new methods.
+
 Difficulty in Mocking for Tests: If a class has to mock methods that are irrelevant to the test, it often indicates an ISP violation.
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 8. How can Dependency Injection (DI) help achieve the Dependency Inversion Principle (DIP)?
 Answer:
 Dependency Injection helps achieve DIP by allowing high-level modules to rely on abstractions rather than concrete implementations. DI frameworks in C# (e.g., Autofac, Unity) inject dependencies based on interfaces or abstract classes, allowing the application to be more flexible and easily testable by switching out dependencies.
@@ -427,7 +315,9 @@ public class ReportService
     public void GenerateReport() { _logger.Log("Report generated."); }
 }
 By injecting ILogger, ReportService follows DIP, and any implementation of ILogger (like DatabaseLogger, ConsoleLogger, etc.) can be used without modifying ReportService.
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 9. When might the Single Responsibility Principle (SRP) lead to a design that is harder to understand and maintain?
 Answer:
 SRP can lead to overly fragmented classes if taken to an extreme, making the design difficult to understand due to the sheer number of small classes. 
