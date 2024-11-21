@@ -12,7 +12,6 @@ In web programming, asynchronous operations work similarly. When a server receiv
 2.async and await are features in C# that facilitate writing asynchronous code in a more readable and maintainable manner. 
 Asynchronous programming is essential for building responsive and scalable applications, especially when dealing with I/O-bound operations like network requests, file I/O, or database queries.
 
-Here's what each of these keywords does:
 
 async: This keyword is used to define an asynchronous method. It indicates that the method contains asynchronous operations and can be awaited. An async method can have an asynchronous signature, meaning it returns a Task or Task<TResult> instead of void or TResult.
 
@@ -25,7 +24,13 @@ public async Task<int> SomeAsyncMethod()
     return 42;
 }
 
-await: This keyword is used to asynchronously wait for the completion of an asynchronous operation. It tells the compiler to suspend execution of the method until the awaited task completes. The result of the awaited task (if any) is returned once the task is complete.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+await:
+
+1.This keyword is used to asynchronously wait for the completion of an asynchronous operation. 
+2.It tells the compiler to suspend execution of the method until the awaited task completes. 
+3.The result of the awaited task (if any) is returned once the task is complete.
 
 Example:
 
@@ -36,6 +41,7 @@ public async Task<int> SomeAsyncMethod()
 }
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 The benefits of using async and await include:
 
 1.Improved Readability: Asynchronous code written with async and await looks more like synchronous code, making it easier to understand and maintain.
@@ -51,8 +57,6 @@ The benefits of using async and await include:
 Overall, async and await are powerful tools for building responsive and scalable applications, especially in scenarios where I/O-bound operations are prevalent. They make it easier to write asynchronous code without sacrificing readability and maintainability.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 1.Task.Run: This method schedules a delegate (a method) to run on a ThreadPool thread asynchronously. It returns a Task object representing that operation.
 
@@ -69,6 +73,7 @@ await Task.Run(new Action(LongTask)): This line asynchronously waits for the Tas
 In simpler terms, await Task.Run(new Action(LongTask)) means: "Run the LongTask method on a separate thread, and wait for it to finish before continuing." This allows the program to perform tasks concurrently without blocking the main thread.
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
+
 Task:
 
 1.A Task in programming represents an asynchronous operation that can eventually return a result.
@@ -76,4 +81,3 @@ Task:
 3.This approach allows your application to remain responsive and efficient, just like a busy waiter in a restaurant.
 
 This explanation should help clarify the difference between synchronous and asynchronous operations using a real-world analogy.
-
